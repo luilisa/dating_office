@@ -20,8 +20,7 @@
         <Button layoutX="35.0" layoutY="390.0" mnemonicParsing="false" onAction="#registration" prefHeight="32.0" prefWidth="149.0" text="Зарегистрироваться" />
       <Button fx:id="close" layoutX="217.0" layoutY="390.0" mnemonicParsing="false" onAction="#close" prefHeight="32.0" prefWidth="149.0" text="Отмена" />
       <Label fx:id="label1" layoutX="154.0" layoutY="26.0" prefHeight="17.0" prefWidth="119.0" />
-      <RadioButton layoutX="112.0" layoutY="192.0" mnemonicParsing="false" text="Мужской" />
-      <RadioButton layoutX="217.0" layoutY="192.0" mnemonicParsing="false" text="Женский" />
       <Label layoutX="51.0" layoutY="192.0" text="Пол" />
+      <ChoiceBox layoutX="112.0" layoutY="181.0" prefHeight="32.0" prefWidth="204.0" />
     </children>
 </AnchorPane>
