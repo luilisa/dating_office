@@ -34,7 +34,7 @@ public class User {
         return this.name + ":" + this.surname + ":" + this.email + ":" + this.gender + ":" + this.login + ":" + this.password + ":" + this.birth + ":" + this.requirments + ":" + this.intelligence + "\n";
     }
 
-    public void write() throws Exception {
+    public boolean write() throws Exception {
         File file =
                 new File("userData.txt");
         String[] userData;
@@ -53,6 +53,9 @@ public class User {
             FileWriter writer = new FileWriter(file, true);
             writer.write(getFormatData());
             writer.close();
+            return true;
+        } else {
+            return false;
         }
 
     }
