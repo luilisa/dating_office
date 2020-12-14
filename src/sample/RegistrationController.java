@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 import dating_office_lib.User;
 import java.io.File;
 import java.io.FileWriter;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class RegistrationController {
@@ -33,7 +34,7 @@ public class RegistrationController {
     @FXML
     private Button close;
     public void registration() throws Exception {
-        User user = new User(nameField.getText(), surnameField.getText(), emailField.getText(), genderField.getValue(), loginField.getText(), passwordField.getText(), dateOfBirthField.getAccessibleText());
+        User user = new User(nameField.getText(), surnameField.getText(), emailField.getText(), genderField.getValue(), loginField.getText(), passwordField.getText(), dateOfBirthField.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
         user.write();
         //        File file =
 //                new File("userData");
