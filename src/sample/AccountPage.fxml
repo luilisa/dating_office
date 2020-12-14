@@ -4,7 +4,7 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="573.0" prefWidth="599.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.AccountPage_Controller">
+<AnchorPane prefHeight="573.0" prefWidth="599.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.AccountPage_Controller">
    <children>
       <GridPane layoutX="287.0" layoutY="32.0" prefHeight="175.0" prefWidth="304.0" AnchorPane.bottomAnchor="366.0" AnchorPane.leftAnchor="287.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="32.0">
         <columnConstraints>
@@ -17,6 +17,12 @@
           <RowConstraints maxHeight="114.0" minHeight="10.0" prefHeight="44.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="114.0" minHeight="10.0" prefHeight="49.0" vgrow="SOMETIMES" />
         </rowConstraints>
+         <children>
+            <Label fx:id="nameSurnameLabel" prefHeight="17.0" prefWidth="137.0" GridPane.columnIndex="1" />
+            <Label fx:id="dateOfBirthLabel" prefHeight="17.0" prefWidth="133.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label fx:id="cityLabel" prefHeight="17.0" prefWidth="125.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label fx:id="genderLabel" prefHeight="17.0" prefWidth="135.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+         </children>
       </GridPane>
       <ImageView fitHeight="203.0" fitWidth="217.0" layoutX="35.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true" />
       <Label layoutX="300.0" layoutY="46.0" prefHeight="17.0" prefWidth="28.0" text="ФИО" />
@@ -24,13 +30,13 @@
       <Label layoutX="300.0" layoutY="132.0" text="Город проживания" />
       <Label layoutX="301.0" layoutY="173.0" text="Пол" />
       <Label layoutX="35.0" layoutY="404.0" text="Требования к партнеру" />
-      <TextArea layoutX="36.0" layoutY="331.0" prefHeight="63.0" prefWidth="519.0" />
+      <TextArea fx:id="reqField" layoutX="36.0" layoutY="331.0" prefHeight="63.0" prefWidth="519.0" />
       <Button layoutX="300.0" layoutY="246.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="164.0" text="Изменить информацию" />
       <Button layoutX="35.0" layoutY="246.0" mnemonicParsing="false" text="Изменить фотографию" />
-      <Button layoutX="36.0" layoutY="522.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="106.0" text="Сохранить" />
+      <Button layoutX="36.0" layoutY="522.0" mnemonicParsing="false" onAction="#saveReqInt" prefHeight="25.0" prefWidth="106.0" text="Сохранить" />
       <Button layoutX="179.0" layoutY="522.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="130.0" text="Перейти к поиску" />
-      <Button layoutX="438.0" layoutY="522.0" mnemonicParsing="false" text="Удалить аккаунт" />
-      <TextArea layoutX="36.0" layoutY="429.0" prefHeight="63.0" prefWidth="519.0" />
+      <Button layoutX="438.0" layoutY="522.0" mnemonicParsing="false" onAction="#deleteAcc" text="Удалить аккаунт" />
+      <TextArea fx:id="intField" layoutX="36.0" layoutY="429.0" prefHeight="63.0" prefWidth="519.0" />
       <Label layoutX="35.0" layoutY="304.0" text="Сведения о себе" />
    </children>
 </AnchorPane>

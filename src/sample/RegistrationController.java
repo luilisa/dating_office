@@ -8,8 +8,11 @@ import javafx.scene.control.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import dating_office_lib.User;
+import javafx.stage.StageStyle;
+
 import java.io.File;
 import java.io.FileWriter;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class RegistrationController {
@@ -33,41 +36,30 @@ public class RegistrationController {
     @FXML
     private Button close;
     public void registration() throws Exception {
-        User user = new User(nameField.getText(), surnameField.getText(), emailField.getText(), genderField.getValue(), loginField.getText(), passwordField.getText(), dateOfBirthField.getAccessibleText());
-        user.write();
-        //        File file =
-//                new File("userData");
-//        Scanner sc = new Scanner(file);
-//        boolean userExists = false;
-//        while (sc.hasNextLine()) {
-//            userData = sc.nextLine().split(":");
-//            User acceptedUser = new User(nameField.getText(), surnameField.getText(), emailField.getText(), genderField.getValue(), loginField.getText(), passwordField.getText(), dateOfBirthField.getText());
-//
-//            if (user.login.equals(acceptedUser.login)) {
-//                Alert alert = new Alert(Alert.AlertType.ERROR);
-//                alert.setTitle("Ошибка");
-//                alert.setHeaderText("Пользователь с таким логином уже существует");
-//                alert.setContentText("Попробуйте другой логин");
-//                alert.showAndWait();
-//                userExists = true;
-//            }
-//        }
-//
-//        if (!userExists) {
-//            FileWriter writer = new FileWriter(file, true);
-//            writer.write("\n"+user.login + ":" + user.password);
-//            label1.setTextFill(Color.GREEN);
-//            label1.setText("Регистрация успешно завершена");
-//            writer.close();
-//
-//            Stage stage = new Stage();
-//            stage.setTitle("Ваш аккаунт");
-//            Parent root = FXMLLoader.load(getClass().getResource("AccountPage.fxml"));
-//            Scene scene = new Scene(root);
-//            stage.setScene(scene);
-//            stage.show();
-//        }
+        User user = new User(nameField.getText(), surnameField.getText(), emailField.getText(), genderField.getValue(), loginField.getText(), passwordField.getText(), dateOfBirthField.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+        if (user.write()) {
+            label1.setTextFill(Color.GREEN);
+            label1.setText("Регистрация успешно завершена");
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AccountPage.fxml"));
 
+            Stage stage = new Stage(StageStyle.DECORATED);
+            stage.setTitle("Ваш аккаунт");
+            Parent root = (Parent)fxmlLoader.load();
+            Scene scene = new Scene(root);
+
+            AccountPage_Controller controller = fxmlLoader.getController();
+            controller.initData(user);
+
+            stage.setScene(scene);
+            stage.show();
+            close();
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Ошибка");
+            alert.setHeaderText("Пользователь с таким логином уже существует");
+            alert.setContentText("Попробуйте другой логин");
+            alert.showAndWait();
+        }
 
     }
     public void close() {

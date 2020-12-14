@@ -15,7 +15,9 @@ import java.util.Scanner;
 public class User {
 
     private static int id;
-    private String name, surname, email,  gender, login, password, requirments, intelligence, birth, city;
+    File file =
+            new File("userData.txt");
+    public String name, surname, email,  gender, login, password, requirments, intelligence, birth, city;
 
     public User(String name, String surname, String email, String gender, String login, String password, String birth) {
         this.name = name;
@@ -34,9 +36,22 @@ public class User {
         return this.name + ":" + this.surname + ":" + this.email + ":" + this.gender + ":" + this.login + ":" + this.password + ":" + this.birth + ":" + this.requirments + ":" + this.intelligence + "\n";
     }
 
-    public void write() throws Exception {
-        File file =
-                new File("userData.txt");
+    public ArrayList<User> getUserData()  throws Exception  {
+        String[] userData;
+        ArrayList<User> users = new ArrayList<User>();;
+        User acceptedUser = null;
+        Scanner sc = new Scanner(file);
+        boolean userExists = false;
+        while (sc.hasNextLine()) {
+            userData = sc.nextLine().split(":");
+            acceptedUser = new User(userData[0],userData[1],userData[2],userData[3],userData[4],userData[5],userData[6]);
+            users.add(acceptedUser);
+        }
+        sc.close();
+        return users;
+    }
+
+    public boolean write() throws Exception {
         String[] userData;
         Scanner sc = new Scanner(file);
         boolean userExists = false;
@@ -53,13 +68,14 @@ public class User {
             FileWriter writer = new FileWriter(file, true);
             writer.write(getFormatData());
             writer.close();
+            return true;
+        } else {
+            return false;
         }
 
     }
 
     public  void updateReqInt(String requirments, String intelligence) throws Exception {
-        File file =
-                new File("userData.txt");
         File tempFile = new File("myTempFile.txt");
 
         BufferedReader reader = new BufferedReader(new FileReader(file));
@@ -69,7 +85,7 @@ public class User {
         String currentLine;
         while((currentLine = reader.readLine()) != null) {
             String email = currentLine.split(":")[2];
-
+            System.out.println(1);
             if(email.equals(getFormatData().trim().split(":")[2])) {
                 writer.write(getFormatData());
             } else {
@@ -89,8 +105,6 @@ public class User {
     }
 
     public  void updateInfo(String name, String surname, String birth, String city, String gender) throws Exception {
-        File file =
-                new File("userData.txt");
         File tempFile = new File("myTempFile.txt");
 
         this.name = name;
@@ -126,8 +140,6 @@ public class User {
         System.out.println(successful);
     }
     public void delete() throws Exception {
-        File file =
-                new File("userData.txt");
         File tempFile = new File("myTempFile.txt");
         BufferedReader reader = new BufferedReader(new FileReader(file));
         BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
