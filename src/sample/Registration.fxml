@@ -3,12 +3,12 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="463.0" prefWidth="397.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.RegistrationController">
+<AnchorPane prefHeight="463.0" prefWidth="397.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.RegistrationController">
     <children>
-        <TextField fx:id="name" layoutX="112.0" layoutY="43.0" prefHeight="32.0" prefWidth="204.0" />
-        <TextField fx:id="surname" layoutX="112.0" layoutY="87.0" prefHeight="32.0" prefWidth="204.0" />
-        <TextField fx:id="email" layoutX="112.0" layoutY="135.0" prefHeight="32.0" prefWidth="204.0" />
-        <DatePicker fx:id="dateOfBirth" layoutX="107.0" layoutY="226.0" prefHeight="32.0" prefWidth="204.0" />
+        <TextField fx:id="nameField" layoutX="112.0" layoutY="43.0" prefHeight="32.0" prefWidth="204.0" />
+        <TextField fx:id="surnameField" layoutX="112.0" layoutY="87.0" prefHeight="32.0" prefWidth="204.0" />
+        <TextField fx:id="emailField" layoutX="112.0" layoutY="135.0" prefHeight="32.0" prefWidth="204.0" />
+        <DatePicker fx:id="dateOfBirthField" layoutX="112.0" layoutY="226.0" prefHeight="32.0" prefWidth="204.0" />
         <Label layoutX="53.0" layoutY="51.0" text="Имя" />
         <Label layoutX="40.0" layoutY="95.0" text="Фамилия" />
         <Label layoutX="34.0" layoutY="143.0" prefHeight="17.0" prefWidth="62.0" text="Ваш Email" />
@@ -20,8 +20,7 @@
         <Button layoutX="35.0" layoutY="390.0" mnemonicParsing="false" onAction="#registration" prefHeight="32.0" prefWidth="149.0" text="Зарегистрироваться" />
       <Button fx:id="close" layoutX="217.0" layoutY="390.0" mnemonicParsing="false" onAction="#close" prefHeight="32.0" prefWidth="149.0" text="Отмена" />
       <Label fx:id="label1" layoutX="154.0" layoutY="26.0" prefHeight="17.0" prefWidth="119.0" />
-      <RadioButton layoutX="112.0" layoutY="192.0" mnemonicParsing="false" text="Мужской" />
-      <RadioButton layoutX="217.0" layoutY="192.0" mnemonicParsing="false" text="Женский" />
       <Label layoutX="51.0" layoutY="192.0" text="Пол" />
+      <ChoiceBox fx:id="genderField" layoutX="112.0" layoutY="188.0" prefWidth="150.0" />
     </children>
 </AnchorPane>
