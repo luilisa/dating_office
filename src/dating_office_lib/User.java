@@ -18,6 +18,7 @@ import java.util.Scanner;
 public class User {
 
     private static int id;
+    public String img;
     File file =
             new File("userData.txt");
     public String email,  login, password, requirments, intelligence;
@@ -35,6 +36,7 @@ public class User {
         this.requirments = "";
         this.intelligence = "";
         this.city = new SimpleStringProperty(city);
+        this.img = "file:///" + "pngwing.com.png";
     }
 
     public String getName() {
@@ -73,7 +75,7 @@ public class User {
     }
 
     public String getFormatData() {
-        return getName() + ":" + getSurname() + ":" + this.email + ":" + getGender() + ":" + this.login + ":" + this.password + ":" + getBirth() + ":" + getCity() + ":" + this.requirments + ":" + this.intelligence  + "\n";
+        return getName() + ";" + getSurname() + ";" + this.email + ";" + getGender() + ";" + this.login + ";" + this.password + ";" + getBirth() + ";" + getCity() + ";" + this.requirments + ";" + this.intelligence  + ";" + this.img + "\n";
     }
 
     public static ObservableList<User> getUserData()  throws Exception  {
@@ -86,7 +88,7 @@ public class User {
         Scanner sc = new Scanner(file);
         boolean userExists = false;
         while (sc.hasNextLine()) {
-            userData = sc.nextLine().split(":");
+            userData = sc.nextLine().split(";");
             acceptedUser = new User(userData[0],userData[1],userData[2],userData[3],userData[4],userData[5],userData[6], userData[7]);
             data.add(acceptedUser);
 
@@ -100,7 +102,7 @@ public class User {
         Scanner sc = new Scanner(file);
         boolean userExists = false;
         while (sc.hasNextLine()) {
-            userData = sc.nextLine().split(":");
+            userData = sc.nextLine().split(";");
             User acceptedUser = new User(userData[0],userData[1],userData[2],userData[3],userData[4],userData[5],userData[6], userData[7]);
 
             if (this.login.equals(acceptedUser.login)) {
@@ -119,6 +121,50 @@ public class User {
 
     }
 
+    public static User getUserByNameSurname(String name, String surname) throws FileNotFoundException {
+        File file =
+                new File("userData.txt");
+        String[] userData;
+        Scanner sc = new Scanner(file);
+        boolean userExists = false;
+        while (sc.hasNextLine()) {
+            userData = sc.nextLine().split(";");
+            User acceptedUser = new User(userData[0],userData[1],userData[2],userData[3],userData[4],userData[5],userData[6], userData[7]);
+
+            if ((name.equals(acceptedUser.getName())) && (surname.equals(acceptedUser.getSurname()))) {
+                acceptedUser.requirments = userData[8];
+                acceptedUser.intelligence = userData[9];
+                acceptedUser.img = userData[10];
+                return acceptedUser;
+            }
+        }
+        sc.close();
+        return null;
+    }
+
+    public static User findUser(String login) throws FileNotFoundException {
+        File file =
+                new File("userData.txt");
+        String[] userData;
+        Scanner sc = new Scanner(file);
+        boolean userExists = false;
+        while (sc.hasNextLine()) {
+            userData = sc.nextLine().split(";");
+            User acceptedUser = new User(userData[0],userData[1],userData[2],userData[3],userData[4],userData[5],userData[6], userData[7]);
+
+            if ((login.equals(acceptedUser.login))) {
+                acceptedUser.requirments = userData[8];
+                acceptedUser.intelligence = userData[9];
+                acceptedUser.img = userData[10];
+                sc.close();
+                return acceptedUser;
+            }
+
+        }
+        sc.close();
+        return null;
+    }
+
     public  void updateReqInt(String requirments, String intelligence) throws Exception {
         File tempFile = new File("myTempFile.txt");
 
@@ -128,9 +174,9 @@ public class User {
         this.intelligence = intelligence;
         String currentLine;
         while((currentLine = reader.readLine()) != null) {
-            String email = currentLine.split(":")[2];
+            String email = currentLine.split(";")[2];
             System.out.println(1);
-            if(email.equals(getFormatData().trim().split(":")[2])) {
+            if(email.equals(getFormatData().trim().split(";")[2])) {
                 writer.write(getFormatData());
             } else {
                 writer.write(currentLine + System.getProperty("line.separator"));
@@ -162,9 +208,9 @@ public class User {
 
         String currentLine;
         while((currentLine = reader.readLine()) != null) {
-            String email = currentLine.split(":")[2];
+            String email = currentLine.split(";")[2];
 
-            if(email.equals(getFormatData().trim().split(":")[2])) {
+            if(email.equals(getFormatData().trim().split(";")[2])) {
                 System.out.println("Tut");
                 writer.write(getFormatData());
             } else {
@@ -183,6 +229,38 @@ public class User {
         boolean successful = tempFile.renameTo(file);
         System.out.println(successful);
     }
+
+    public  void updatePic(String imgpath) throws Exception {
+        File tempFile = new File("myTempFile.txt");
+        this.img = imgpath;
+
+        BufferedReader reader = new BufferedReader(new FileReader(file));
+        BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
+
+        String currentLine;
+        while((currentLine = reader.readLine()) != null) {
+            String email = currentLine.split(";")[2];
+
+            if(email.equals(getFormatData().trim().split(";")[2])) {
+                System.out.println("Tut");
+                writer.write(getFormatData());
+            } else {
+                System.out.println("Tam");
+                writer.write(currentLine + System.getProperty("line.separator"));
+            }
+        }
+
+        writer.close();
+        reader.close();
+        if (!file.delete()) {
+            System.out.println("Could not delete file");
+            System.out.println(file.getAbsolutePath());
+            return;
+        }
+        boolean successful = tempFile.renameTo(file);
+        System.out.println(successful);
+    }
+
     public void delete() throws Exception {
         File tempFile = new File("myTempFile.txt");
         BufferedReader reader = new BufferedReader(new FileReader(file));

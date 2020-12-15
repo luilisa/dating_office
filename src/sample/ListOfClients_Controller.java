@@ -4,14 +4,26 @@ import dating_office_lib.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.TableView;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.net.URL;
 import java.util.Date;
 import java.util.ResourceBundle;
@@ -39,20 +51,26 @@ public class ListOfClients_Controller {
     private Label intField;
     @FXML
     private Label cityLabel;
+    @FXML
+    private Label label1;
+    @FXML private ImageView imgPic;
 
     @FXML
     public void initialize() throws Exception {
         initData();
     }
     @FXML
-    public void clickItem(MouseEvent event)
-    {
+    public void clickItem(MouseEvent event) throws FileNotFoundException {
         if (event.getClickCount() == 2) //Checking double click
         {
             System.out.println(catalogTable.getSelectionModel().getSelectedItem().getName());
             clientNameLabel.setText(catalogTable.getSelectionModel().getSelectedItem().getName());
-            reqField.setText(catalogTable.getSelectionModel().getSelectedItem().requirments);
-            intField.setText(catalogTable.getSelectionModel().getSelectedItem().intelligence);
+            User tmpuser = User.getUserByNameSurname(catalogTable.getSelectionModel().getSelectedItem().getName(), catalogTable.getSelectionModel().getSelectedItem().getSurname());
+            reqField.setText(tmpuser.requirments);
+            intField.setText(tmpuser.intelligence);
+            Image image = new Image(tmpuser.img);
+            imgPic.setImage(image);
+            label1.setText("");
         }
     }
 
@@ -63,6 +81,41 @@ public class ListOfClients_Controller {
         city.setCellValueFactory(new PropertyValueFactory<User, String>("city"));
         gender.setCellValueFactory(new PropertyValueFactory<User, String>("gender"));
         catalogTable.setItems(User.getUserData());
+    }
+
+    public void setMeeting() throws IOException {
+        Stage stage = (Stage) clientNameLabel.getScene().getWindow();
+        User u = (User) stage.getUserData();
+        File file =
+                new File("Dates.txt");
+        label1.setTextFill(Color.GREEN);
+        label1.setText("Date is set");
+        FileWriter writer = new FileWriter(file, true);
+        writer.write(u.getName() + "+" + catalogTable.getSelectionModel().getSelectedItem().getName() + "\n");
+        writer.close();
+    }
+
+    public void backToAcc() throws IOException {
+        Stage thisStage = (Stage) clientNameLabel.getScene().getWindow();
+        User u = (User) thisStage.getUserData();
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AccountPage.fxml"));
+
+        Stage stage = new Stage(StageStyle.DECORATED);
+        stage.setTitle("Ваш аккаунт");
+        Parent root = (Parent)fxmlLoader.load();
+        Scene scene = new Scene(root);
+
+        AccountPage_Controller controller = fxmlLoader.getController();
+        controller.initData(u);
+
+        stage.setScene(scene);
+        stage.show();
+        close();
+    }
+
+    public void close() {
+        Stage stage = (Stage) reqField.getScene().getWindow();
+        stage.close();
     }
 
 }

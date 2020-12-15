@@ -10,10 +10,16 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import java.io.File;
 import java.time.format.DateTimeFormatter;
 
 public class AccountPage_Controller {
@@ -30,6 +36,7 @@ public class AccountPage_Controller {
     @FXML
     private TextArea intField;
     private User user;
+    @FXML private ImageView img;
 
 
     @FXML
@@ -42,6 +49,10 @@ public class AccountPage_Controller {
         dateOfBirthLabel.setText(user.getBirth());
         cityLabel.setText(user.getCity());
         genderLabel.setText(user.getGender());
+        reqField.setText(user.requirments);
+        intField.setText(user.intelligence);
+        Image image = new Image(user.img);
+        img.setImage(image);
     }
     public void saveReqInt() throws Exception {
         this.user.updateReqInt(reqField.getText(), intField.getText());
@@ -58,11 +69,28 @@ public class AccountPage_Controller {
         stage.close();
     }
 
+    public void changeImg() throws Exception {
+        JFileChooser chooser = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter(
+                "JPG & GIF Images", "jpg", "gif");
+        chooser.setFileFilter(filter);
+        int returnVal = chooser.showOpenDialog(null);
+        if(returnVal == JFileChooser.APPROVE_OPTION) {
+            System.out.println("You chose to open this file: " +
+                    chooser.getSelectedFile().getName());
+        }
+        System.out.println("file:///" + chooser.getSelectedFile().getAbsolutePath());
+        Image image = new Image("file:///" + chooser.getSelectedFile().getAbsolutePath());
+        img.setImage(image);
+        this.user.updatePic("file:///" + chooser.getSelectedFile().getAbsolutePath());
+    }
+
     public void goToFind() throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("ListOfClients.fxml"));
 
         Stage stage = new Stage(StageStyle.DECORATED);
         stage.setTitle("Список зарегистрированных пользователей");
+        stage.setUserData(this.user);
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();

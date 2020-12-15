@@ -25,15 +25,16 @@
                </children></AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="624.0" prefWidth="515.0">
                <children>
-                  <ImageView fitHeight="189.0" fitWidth="243.0" layoutX="191.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true" />
-                  <Button layoutX="14.0" layoutY="565.0" mnemonicParsing="false" text="Назначить свидание" />
-                  <Button layoutX="313.0" layoutY="565.0" mnemonicParsing="false" text="Вернуться в аккаунт" />
+                  <ImageView fx:id="imgPic" fitHeight="189.0" fitWidth="243.0" layoutX="191.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true" />
+                  <Button layoutX="14.0" layoutY="565.0" mnemonicParsing="false" onAction="#setMeeting" text="Назначить свидание" />
+                  <Button layoutX="313.0" layoutY="565.0" mnemonicParsing="false" onAction="#backToAcc" text="Вернуться в аккаунт" />
                   <Label layoutX="30.0" layoutY="30.0" prefHeight="17.0" prefWidth="116.0" text="Знакомьтесь," />
                   <Label fx:id="clientNameLabel" layoutX="30.0" layoutY="56.0" prefHeight="17.0" prefWidth="109.0" />
                   <Label layoutX="30.0" layoutY="381.0" prefHeight="17.0" prefWidth="148.0" text="Требования" />
                   <Label layoutX="30.0" layoutY="456.0" prefHeight="17.0" prefWidth="148.0" text="Сведннья" />
                   <Label fx:id="reqField" layoutX="207.0" layoutY="381.0" prefHeight="17.0" prefWidth="148.0" />
                   <Label fx:id="intField" layoutX="207.0" layoutY="456.0" prefHeight="17.0" prefWidth="148.0" />
+                  <Label fx:id="label1" layoutX="164.0" layoutY="569.0" />
                </children>
             </AnchorPane>
         </items>

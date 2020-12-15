@@ -24,15 +24,14 @@
             <Label fx:id="genderLabel" prefHeight="17.0" prefWidth="135.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
          </children>
       </GridPane>
-      <ImageView fitHeight="203.0" fitWidth="217.0" layoutX="35.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="img" fitHeight="203.0" fitWidth="217.0" layoutX="35.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true" />
       <Label layoutX="300.0" layoutY="46.0" prefHeight="17.0" prefWidth="28.0" text="ФИО" />
       <Label layoutX="300.0" layoutY="89.0" text="Дата рождения" />
       <Label layoutX="300.0" layoutY="132.0" text="Город проживания" />
       <Label layoutX="301.0" layoutY="173.0" text="Пол" />
       <Label layoutX="35.0" layoutY="404.0" text="Требования к партнеру" />
       <TextArea fx:id="reqField" layoutX="36.0" layoutY="331.0" prefHeight="63.0" prefWidth="519.0" />
-      <Button layoutX="300.0" layoutY="246.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="164.0" text="Изменить информацию" />
-      <Button layoutX="35.0" layoutY="246.0" mnemonicParsing="false" text="Изменить фотографию" />
+      <Button layoutX="35.0" layoutY="246.0" mnemonicParsing="false"  onAction="#changeImg" text="Изменить фотографию" />
       <Button layoutX="36.0" layoutY="522.0" mnemonicParsing="false" onAction="#saveReqInt" prefHeight="25.0" prefWidth="106.0" text="Сохранить" />
       <Button layoutX="179.0" layoutY="522.0" mnemonicParsing="false" onAction="#goToFind" prefHeight="25.0" prefWidth="130.0" text="Перейти к поиску" />
       <Button layoutX="438.0" layoutY="522.0" mnemonicParsing="false" onAction="#deleteAcc" text="Удалить аккаунт" />
