@@ -1,5 +1,8 @@
 package dating_office_lib;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -17,38 +20,79 @@ public class User {
     private static int id;
     File file =
             new File("userData.txt");
-    public String name, surname, email,  gender, login, password, requirments, intelligence, birth, city;
+    public String email,  login, password, requirments, intelligence;
+    private final SimpleStringProperty name, surname, gender, city, birth;
 
-    public User(String name, String surname, String email, String gender, String login, String password, String birth) {
-        this.name = name;
-        this.surname = surname;
+
+    public User(String name, String surname, String email, String gender, String login, String password, String birth, String city) {
+        this.name = new SimpleStringProperty(name);
+        this.surname = new SimpleStringProperty(surname);
         this.email = email;
-        this.gender = gender;
+        this.gender =  new SimpleStringProperty(gender);
         this.login = login;
         this.password = password;
-        this.birth = birth;
+        this.birth =  new SimpleStringProperty(birth);
         this.requirments = "";
         this.intelligence = "";
-        this.city = "";
+        this.city = new SimpleStringProperty(city);
+    }
+
+    public String getName() {
+        return name.get();
+    }
+    public void setName(String fName) {
+        name.set(fName);
+    }
+
+    public String getSurname() {
+        return surname.get();
+    }
+    public void setSurname(String fName) {
+        surname.set(fName);
+    }
+
+    public String getGender() {
+        return gender.get();
+    }
+    public void setGender(String fName) {
+        gender.set(fName);
+    }
+
+    public String getBirth() {
+        return birth.get();
+    }
+    public void setBirth(String fName) {
+        birth.set(fName);
+    }
+
+    public String getCity() {
+        return city.get();
+    }
+    public void setCity(String fName) {
+        city.set(fName);
     }
 
     public String getFormatData() {
-        return this.name + ":" + this.surname + ":" + this.email + ":" + this.gender + ":" + this.login + ":" + this.password + ":" + this.birth + ":" + this.requirments + ":" + this.intelligence + "\n";
+        return getName() + ":" + getSurname() + ":" + this.email + ":" + getGender() + ":" + this.login + ":" + this.password + ":" + getBirth() + ":" + getCity() + ":" + this.requirments + ":" + this.intelligence  + "\n";
     }
 
-    public ArrayList<User> getUserData()  throws Exception  {
+    public static ObservableList<User> getUserData()  throws Exception  {
         String[] userData;
-        ArrayList<User> users = new ArrayList<User>();;
+        File file =
+                new File("userData.txt");
+        ObservableList<User> data =
+                FXCollections.observableArrayList();
         User acceptedUser = null;
         Scanner sc = new Scanner(file);
         boolean userExists = false;
         while (sc.hasNextLine()) {
             userData = sc.nextLine().split(":");
-            acceptedUser = new User(userData[0],userData[1],userData[2],userData[3],userData[4],userData[5],userData[6]);
-            users.add(acceptedUser);
+            acceptedUser = new User(userData[0],userData[1],userData[2],userData[3],userData[4],userData[5],userData[6], userData[7]);
+            data.add(acceptedUser);
+
         }
         sc.close();
-        return users;
+        return data;
     }
 
     public boolean write() throws Exception {
@@ -57,7 +101,7 @@ public class User {
         boolean userExists = false;
         while (sc.hasNextLine()) {
             userData = sc.nextLine().split(":");
-            User acceptedUser = new User(userData[0],userData[1],userData[2],userData[3],userData[4],userData[5],userData[6]);
+            User acceptedUser = new User(userData[0],userData[1],userData[2],userData[3],userData[4],userData[5],userData[6], userData[7]);
 
             if (this.login.equals(acceptedUser.login)) {
                 userExists = true;
@@ -107,11 +151,11 @@ public class User {
     public  void updateInfo(String name, String surname, String birth, String city, String gender) throws Exception {
         File tempFile = new File("myTempFile.txt");
 
-        this.name = name;
-        this.surname = surname;
-        this.birth = birth;
-        this.city = city;
-        this.gender = gender;
+        setName(name);
+        setSurname(surname);
+        setBirth(birth);
+        setCity(city);
+        setGender(gender);
 
         BufferedReader reader = new BufferedReader(new FileReader(file));
         BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));

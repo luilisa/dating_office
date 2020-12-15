@@ -36,7 +36,7 @@ public class RegistrationController {
     @FXML
     private Button close;
     public void registration() throws Exception {
-        User user = new User(nameField.getText(), surnameField.getText(), emailField.getText(), genderField.getValue(), loginField.getText(), passwordField.getText(), dateOfBirthField.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+        User user = new User(nameField.getText(), surnameField.getText(), emailField.getText(), genderField.getValue(), loginField.getText(), passwordField.getText(), dateOfBirthField.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")), "Kazan");
         if (user.write()) {
             label1.setTextFill(Color.GREEN);
             label1.setText("Регистрация успешно завершена");
@@ -67,4 +67,3 @@ public class RegistrationController {
         stage.close();
     }
 }
-

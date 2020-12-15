@@ -34,7 +34,7 @@
       <Button layoutX="300.0" layoutY="246.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="164.0" text="Изменить информацию" />
       <Button layoutX="35.0" layoutY="246.0" mnemonicParsing="false" text="Изменить фотографию" />
       <Button layoutX="36.0" layoutY="522.0" mnemonicParsing="false" onAction="#saveReqInt" prefHeight="25.0" prefWidth="106.0" text="Сохранить" />
-      <Button layoutX="179.0" layoutY="522.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="130.0" text="Перейти к поиску" />
+      <Button layoutX="179.0" layoutY="522.0" mnemonicParsing="false" onAction="#goToFind" prefHeight="25.0" prefWidth="130.0" text="Перейти к поиску" />
       <Button layoutX="438.0" layoutY="522.0" mnemonicParsing="false" onAction="#deleteAcc" text="Удалить аккаунт" />
       <TextArea fx:id="intField" layoutX="36.0" layoutY="429.0" prefHeight="63.0" prefWidth="519.0" />
       <Label layoutX="35.0" layoutY="304.0" text="Сведения о себе" />
