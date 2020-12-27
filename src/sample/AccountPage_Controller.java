@@ -1,26 +1,19 @@
 package sample;
 
-import dating_office_lib.User;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.paint.Color;
-import javafx.stage.DirectoryChooser;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import java.io.File;
-import java.time.format.DateTimeFormatter;
 
 public class AccountPage_Controller {
     @FXML
@@ -41,6 +34,8 @@ public class AccountPage_Controller {
 
     @FXML
     public void initialize() {
+        GridPane grid = new GridPane();
+        grid.getStyleClass().add("grid");
     }
 
     void initData(User user) {
@@ -94,7 +89,7 @@ public class AccountPage_Controller {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-
+        stage.getIcons().add(new Image("file:///" + "C:\\Users\\User\\IdeaProjects\\Курсовая\\dating_office\\heart.png"));
         stage.setScene(scene);
         stage.show();
 

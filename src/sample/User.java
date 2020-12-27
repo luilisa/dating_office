@@ -1,18 +1,10 @@
-package dating_office_lib;
+package sample;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.paint.Color;
-import javafx.stage.Stage;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.Scanner;
 
 public class User {
@@ -36,7 +28,7 @@ public class User {
         this.requirments = "";
         this.intelligence = "";
         this.city = new SimpleStringProperty(city);
-        this.img = "file:///" + "pngwing.com.png";
+        this.img = "file:///" + "C:\\Users\\User\\IdeaProjects\\Курсовая\\dating_office\\pngwing.com.png";
     }
 
     public String getName() {
@@ -86,7 +78,6 @@ public class User {
                 FXCollections.observableArrayList();
         User acceptedUser = null;
         Scanner sc = new Scanner(file);
-        boolean userExists = false;
         while (sc.hasNextLine()) {
             userData = sc.nextLine().split(";");
             acceptedUser = new User(userData[0],userData[1],userData[2],userData[3],userData[4],userData[5],userData[6], userData[7]);
@@ -135,6 +126,7 @@ public class User {
                 acceptedUser.requirments = userData[8];
                 acceptedUser.intelligence = userData[9];
                 acceptedUser.img = userData[10];
+                sc.close();
                 return acceptedUser;
             }
         }
@@ -147,7 +139,6 @@ public class User {
                 new File("userData.txt");
         String[] userData;
         Scanner sc = new Scanner(file);
-        boolean userExists = false;
         while (sc.hasNextLine()) {
             userData = sc.nextLine().split(";");
             User acceptedUser = new User(userData[0],userData[1],userData[2],userData[3],userData[4],userData[5],userData[6], userData[7]);

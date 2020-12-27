@@ -1,6 +1,5 @@
 package sample;
 
-import dating_office_lib.User;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -8,12 +7,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-
-import java.io.File;
-import java.util.Scanner;
 
 public class Controller {
 
@@ -24,6 +21,7 @@ public class Controller {
     private TextField textField2;
     @FXML
     private Label label1;
+
     public void handleButtonAction() throws Exception {
 
 
@@ -40,7 +38,7 @@ public class Controller {
 
             AccountPage_Controller controller = fxmlLoader.getController();
             controller.initData(checkUser);
-
+            stage.getIcons().add(new Image("file:///" + "C:\\Users\\User\\IdeaProjects\\Курсовая\\dating_office\\heart.png"));
             stage.setScene(scene);
             stage.show();
             close();
@@ -58,6 +56,7 @@ public class Controller {
         stage.setTitle("Регистрация");
         Parent root = FXMLLoader.load(getClass().getResource("Registration.fxml"));
         Scene scene = new Scene(root);
+        stage.getIcons().add(new Image("file:///" + "C:\\Users\\User\\IdeaProjects\\Курсовая\\dating_office\\heart.png"));
         stage.setScene(scene);
         stage.show();
     }

@@ -1,0 +1,26 @@
+.root {
+-fx-background-color: #FFB6C1;
+-fx-font-style: italic;
+}
+ .button {
+   -fx-background-color: #FAEBD7;
+   }
+   .button:hover {
+    -fx-background-color: #FFF8DC;
+    -fx-border-color: black;
+    }
+   .text-field {
+   -fx-background-color: #FAEBD7;
+   -fx-border-color: black;
+   }
+   .text-field:focused {
+   -fx-background-color: #FAEBD7;
+   }
+#genderField {
+-fx-background-color: #FAEBD7;
+-fx-border-color: black;
+}
+.label {
+-fx-background-color: #FAEBD7;
+}
+

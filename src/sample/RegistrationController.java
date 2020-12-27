@@ -5,15 +5,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import dating_office_lib.User;
 import javafx.stage.StageStyle;
 
-import java.io.File;
-import java.io.FileWriter;
 import java.time.format.DateTimeFormatter;
-import java.util.Scanner;
 
 public class RegistrationController {
     String[] userData;
@@ -35,11 +33,18 @@ public class RegistrationController {
     private Label label1;
     @FXML
     private Button close;
+    @FXML
+    private Button registrationButton;
+    @FXML
+    private Label registrationLabel;
+
+    @FXML
+    public void initialize() throws Exception {
+    }
     public void registration() throws Exception {
         User user = new User(nameField.getText(), surnameField.getText(), emailField.getText(), genderField.getValue(), loginField.getText(), passwordField.getText(), dateOfBirthField.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")), "Kazan");
         if (user.write()) {
-            label1.setTextFill(Color.GREEN);
-            label1.setText("Регистрация успешно завершена");
+
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AccountPage.fxml"));
 
             Stage stage = new Stage(StageStyle.DECORATED);
@@ -49,7 +54,7 @@ public class RegistrationController {
 
             AccountPage_Controller controller = fxmlLoader.getController();
             controller.initData(user);
-
+            stage.getIcons().add(new Image("file:///" + "C:\\Users\\User\\IdeaProjects\\Курсовая\\dating_office\\heart.png"));
             stage.setScene(scene);
             stage.show();
             close();

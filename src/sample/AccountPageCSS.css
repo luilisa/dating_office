@@ -1,0 +1,15 @@
+.root {
+-fx-background-color: #FFB6C1;
+-fx-font-style: italic;
+}
+ .button {
+ -fx-background-color: #FAEBD7;
+ }
+
+.button:hover {
+ -fx-background-color: #FFF8DC;
+ -fx-border-color: black;
+  }
+  .grid {
+  -fx-background-color: #FAEBD7;
+  }

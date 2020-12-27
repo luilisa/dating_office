@@ -1,21 +1,17 @@
 package sample;
 
-import dating_office_lib.User;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.TableView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -24,9 +20,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.net.URL;
-import java.util.Date;
-import java.util.ResourceBundle;
 
 public class ListOfClients_Controller {
 //    @FXML
@@ -57,6 +50,8 @@ public class ListOfClients_Controller {
 
     @FXML
     public void initialize() throws Exception {
+        AnchorPane anchorpane = new AnchorPane();
+        anchorpane.getStyleClass().add("pane");
         initData();
     }
     @FXML
@@ -107,7 +102,7 @@ public class ListOfClients_Controller {
 
         AccountPage_Controller controller = fxmlLoader.getController();
         controller.initData(u);
-
+        stage.getIcons().add(new Image("file:///" + "C:\\Users\\User\\IdeaProjects\\Курсовая\\dating_office\\heart.png"));
         stage.setScene(scene);
         stage.show();
         close();
